@@ -7,11 +7,14 @@
 
 <body>
     <div class="center">
-        <img src="/ui/madi.png" class="img-medium" />
+        <img id='madiImage' src="/ui/madi.png" class="img-medium" />
     </div>
     <br>
     <div class="center text-big bold">
         Welcome to the webapp
+    </div>
+    <div class="center" style="color:red">
+        <h3>Click the image for animation</h3>
     </div>
     <div>
         <ul>
@@ -19,6 +22,15 @@
                 <a href="/ui/article-one">Cats</a></li>
             <li><a href="/ui/article-two">Dogs</a></li>
         </ul>
+    </div>
+    <div id="footer" class="center" style="margin-bottom:0px; 
+            position:absolute; bottom:30px; background-color: lavender; 
+            width: 40%;
+            left: 0;
+            right: 0;
+            margin: 0px auto">
+        <span>The </span><button id="counterBtn" type="button">Get Counter</button><span> Button has been pressed </span>
+        <span id="counterValueSpan">0</span><span> times.</span>
     </div>
     <script type="text/javascript" src="/ui/main.js">
 
