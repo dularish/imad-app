@@ -6,11 +6,14 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/ui/style.css">
-   
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="/2bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
 <body>
     <a href="/">Get Back to Home</a>
 <hr>
+
     <div class="container">
 
         <div>
@@ -26,6 +29,39 @@
             <p>I love cats</p>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br>
+    <div class="container border" style="padding-top: 10px;">
+    <div id="commentsDiv">
+        <h4>Comments:</h4>
+        <br>
+        <div class="row" style="align-items:center; padding-top:10px; padding-bottom:10px;">
+        <div class="col-lg-8 col-sm-8 col-xs-8">
+        <h5>Enter your name here and comment below:</h5>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4">
+            <input id="commenter"  type="text" placeholder="FirstName LastName">
+        </div>
+        </div>
+        <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  ">
+                <!--offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2-->
+        <textarea id="commentArea" style="width:inherit" placeholder="Enter your comment here" rows="" ></textarea>
+    </div>
+    <br>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input id="commentButton" type="button" value="Submit">
+    </div>
+    </div>
+    <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+    <div id="commentsListDiv" class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " >
+
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="/ui/main.js">
+</script>
 </body>
 
 </html>

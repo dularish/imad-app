@@ -72,6 +72,15 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
+app.get('/bootstrap.css', function (req, res) {
+  //res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+  res.sendFile(path.join(__dirname,'bootstrap-4.0.0-beta-dist','css','bootstrap-grid.min.css'));
+});
+app.get('/2bootstrap.css', function (req, res) {
+  //res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+  res.sendFile(path.join(__dirname,'bootstrap-4.0.0-beta-dist','css','bootstrap.min.css'));
+});
+
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
@@ -79,6 +88,10 @@ app.get('/ui/madi.png', function (req, res) {
 
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+});
+
+app.get('/ui/article', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
 
 //Counter for the webpage
