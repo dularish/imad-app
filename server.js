@@ -13,20 +13,7 @@ var config = ({
 });
 var pool = new Pool(config);
 
-app.get('/ui/testDB', function (req, resp) {
-  pool.query('SELECT * FROM testTable', function (err, res)  {
-  //console.log(err, res);
-  //pool.end();
-  if (err){
-      resp.status(500).send(err.toString());
-  }
-  else
-  {
-      resp.send(JSON.stringify(res));
-  }
-});
 
-});
 
 
 
@@ -91,6 +78,21 @@ function getTemplate(data) {
 
   return template;
 }
+
+app.get('/ui/testDB', function (req, resp) {
+  pool.query('SELECT * FROM testTable', function (err, res)  {
+  //console.log(err, res);
+  //pool.end();
+  if (err){
+      resp.status(500).send(err.toString());
+  }
+  else
+  {
+      resp.send(JSON.stringify(res));
+  }
+});
+
+});
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
