@@ -1,16 +1,17 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-const { Pool, Client } = require('pg');
+//const { Pool, Client } = require('pg');
+var Pool = require('pg').Pool;
 
-const pool = new Pool({
+var config = ({
   user: 'dularish1993',
   host: 'db.imad.hasura-app.io',
   database: 'dularish1993',
   password: process.env.DB_PASSWORD,
   port: 5432,
 });
-
+var pool = new Pool(config);
 
 app.get('/ui/testDB', function (req, resp) {
   pool.query('SELECT * FROM testTable', function (err, res)  {
