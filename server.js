@@ -99,11 +99,13 @@ var getArticleDataFromDB = function(article){
   //console.log(err, res);
   //pool.end();
   if (err){
-      resp.status(500).send(err.toString());
+      //resp.status(500).send(err.toString());
+      return err.toString();
   }
   else
   {
-      resp.send(JSON.stringify(res));
+      //resp.send(JSON.stringify(res));
+      return JSON.stringify(res);
   }
 });
 };
@@ -152,7 +154,8 @@ app.get('/ui/:articleName', function (req, res) {
 });
 app.get('/ui/fromDB/:articleName', function (req, res) {
   var articleName = req.params.articleName;
-  res.send(getTemplate(article[articleName]));
+  //res.send(getTemplate(article[articleName]));
+  res.send(getArticleDataFromDB(articleName));
   //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
 
