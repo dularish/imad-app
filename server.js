@@ -159,7 +159,7 @@ app.get('/ui/:articleName', function (req, res) {
 app.get('/ui/fromDB/:articleName', function (req, res) {
   var articleName = req.params.articleName;
   //res.send(getTemplate(article[articleName]));
-  res.send(JSON.stringigy(getArticleDataFromDB(articleName)));
+  res.send(JSON.stringify(getArticleDataFromDB(articleName)));
   //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
 
