@@ -84,10 +84,12 @@ app.get('/ui/testDB', function (req, resp) {
   //console.log(err, res);
   //pool.end();
   if (err){
+      return "error";
       resp.status(500).send(err.toString());
   }
   else
   {
+      return "success";
       resp.send(JSON.stringify(res));
   }
 });
