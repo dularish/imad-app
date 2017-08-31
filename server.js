@@ -94,6 +94,20 @@ app.get('/ui/testDB', function (req, resp) {
 
 });
 
+var getArticleDataFromDB = function(article){
+    pool.query('SELECT * FROM articleTable where name ='+article+';', function (err, res)  {
+  //console.log(err, res);
+  //pool.end();
+  if (err){
+      resp.status(500).send(err.toString());
+  }
+  else
+  {
+      resp.send(JSON.stringify(res));
+  }
+});
+};
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -132,6 +146,11 @@ app.get('/counter', function (req, res) {
 });
 
 app.get('/ui/:articleName', function (req, res) {
+  var articleName = req.params.articleName;
+  res.send(getTemplate(article[articleName]));
+  //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+});
+app.get('/ui/fromDB/:articleName', function (req, res) {
   var articleName = req.params.articleName;
   res.send(getTemplate(article[articleName]));
   //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
