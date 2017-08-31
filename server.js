@@ -99,13 +99,13 @@ var getArticleDataFromDB = function(article){
   //console.log(err, res);
   //pool.end();
   if (err){
-      window.alert("failure");
+      //window.alert("failure");
       //resp.status(500).send(err.toString());
       return err.toString();
   }
   else
   {
-      window.alert("success");
+      //window.alert("success");
       //resp.send(JSON.stringify(res));
       return JSON.stringify(res);
   }
