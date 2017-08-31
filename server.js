@@ -95,6 +95,7 @@ app.get('/ui/testDB', function (req, resp) {
 });
 
 var getArticleDataFromDB = function(article){
+    return ("SELECT * FROM articletable where name ='"+article+"';");
     pool.query("SELECT * FROM articletable where name ='"+article+"';", function (err, res)  {
   //console.log(err, res);
   //pool.end();
