@@ -173,7 +173,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
   else
   {
       //window.alert("success");
-      res.send(JSON.stringify(resp));
+      res.send(JSON.stringify(resp.rows));
       //return JSON.stringify(res);
   }
 });
