@@ -172,8 +172,12 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
   }
   else
   {
+      var dataToSend = {
+        'title' : JSON.stringify(resp.rows[0].title),
+        'content' : JSON.stringify(resp.rows[0].content)
+      };
       //window.alert("success");
-      res.send(JSON.stringify(resp.rows[0].title));
+      res.send(getTemplate(dataToSend));
       //return JSON.stringify(res);
   }
 });
