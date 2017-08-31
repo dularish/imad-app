@@ -159,8 +159,25 @@ app.get('/ui/:articleName', function (req, res) {
 app.get('/ui/fromDB/:articleName', function (req, res) {
   var articleName = req.params.articleName;
   //res.send(getTemplate(article[articleName]));
-  res.send(JSON.stringify(getArticleDataFromDB(articleName)));
+  //res.send(JSON.stringify(getArticleDataFromDB(articleName)));
   //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+  
+      pool.query("SELECT * FROM articletable where name ='"+articleName+"';", function (err, resp)  {
+  //console.log(err, res);
+  //pool.end();
+  if (err){
+      //window.alert("failure");
+      res.status(500).send(err.toString());
+      //return err.toString();
+  }
+  else
+  {
+      //window.alert("success");
+      res.send(JSON.stringify(resp));
+      //return JSON.stringify(res);
+  }
+});
+  
 });
 
 
