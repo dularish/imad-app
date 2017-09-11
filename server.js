@@ -22,6 +22,8 @@ var pool = new Pool(config);
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 var article = {
   'article-one': {
     'title': 'Cats',
