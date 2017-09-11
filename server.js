@@ -54,8 +54,8 @@ var article = {
        </p>
        <p>I love dogs</p>`
   }
-}
-function getTemplate(data) {
+};
+/*var getTemplate = function (data) {
   var title = data.title;
   var content = data.content;
   var template = `
@@ -82,7 +82,7 @@ function getTemplate(data) {
 `;
 
   return template;
-}
+};*/
 
 app.get('/ui/testDB', function (req, resp) {
   pool.query('SELECT * FROM testTable', function (err, res)  {
@@ -111,8 +111,6 @@ app.post('/ui/create/create-user', function (req,res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  var salt = crypto.randomBytes(8).toString('hex');
-  var passwordToStore = hashtext(password,salt);
 
   pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
     if(err){
@@ -200,7 +198,7 @@ app.get('/ui/register', function (req, res) {
 
 app.get('/ui/:articleName', function (req, res) {
   var articleName = req.params.articleName;
-  res.send(getTemplate(article[articleName]));
+  res.send(/*getTemplate*/(article[articleName]));
 });
 
 
@@ -220,7 +218,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
         'title' : JSON.parse(JSON.stringify(resp.rows[0].title)),
         'content' : JSON.parse(JSON.stringify(resp.rows[0].content)),
       };
-      res.send(getTemplate(dataToSend));
+      res.send(/*getTemplate*/(dataToSend));
   }
 });
   
@@ -230,7 +228,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
-var port = 8080;
+var port = 80;
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);
 });
