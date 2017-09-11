@@ -3,12 +3,15 @@ var morgan = require('morgan');
 var path = require('path');
 //const { Pool, Client } = require('pg');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var config = ({
   user: 'dularish1993',
   host: 'db.imad.hasura-app.io',
   database: 'dularish1993',
-  password: process.env.DB_PASSWORD,
+  password: 'db-dularish1993-36500',
+  //password: process.env.DB_PASSWORD,
   port: 5432,
 });
 var pool = new Pool(config);
@@ -96,6 +99,41 @@ app.get('/ui/testDB', function (req, resp) {
 
 });
 
+var hashtext = function (password,salt) {
+  var hashedText = crypto.pbkdf2Sync(password,salt,1000,512,'sha512');
+  return ['pbkdf2','1000',salt,'512',hashedText.toString('hex')].join('$');
+}
+
+app.post('/ui/create-user', function (req,res) {
+  
+  var username = req.body.username;
+  var password = req.body.password;
+
+  var salt = crypto.randomBytes(8).toString('hex');
+  var passwordToStore = hashtext(password,salt);
+
+  pool.query('insert into usercredentials values($1,$2)',username,password, function (err,result) {
+    if(err){
+      return "error";
+      res.status(500).send(err.toString());
+    }
+    else{
+      return "success";
+      res.send(JSON.stringify(result));
+    }
+  });
+});
+app.get('/ui/hash/:text', function (req, resp) {
+  
+    var password = req.params.text;
+  
+    var salt = crypto.randomBytes(8).toString('hex');
+    var passwordToStore = hashtext(password,salt);
+  
+    resp.send(passwordToStore.toString());
+  
+  });
+
 var getArticleDataFromDB = function(article){
     pool.query("SELECT * FROM articletable where name ='"+article+"';", function (err, res)  {
   //console.log(err, res);
@@ -143,6 +181,9 @@ app.get('/ui/main.js', function (req, res) {
 app.get('/ui/article', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
+app.get('/register', function (req, res) {
+  res.sendFile(path.join(__dirname, 'register.html'));
+});
 
 //Counter for the webpage
 var counter = 0;
@@ -151,34 +192,33 @@ app.get('/counter', function (req, res) {
   res.send(counter.toString());
 });
 
+app.get('/ui/register', function (req, res) {
+  res.sendFile(path.join(__dirname,'ui','register.html'));
+});
+
 app.get('/ui/:articleName', function (req, res) {
   var articleName = req.params.articleName;
   res.send(getTemplate(article[articleName]));
-  //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
+
+
+
 app.get('/ui/fromDB/:articleName', function (req, res) {
   var articleName = req.params.articleName;
-  //res.send(getTemplate(article[articleName]));
-  //res.send(JSON.stringify(getArticleDataFromDB(articleName)));
-  //res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
   
       pool.query("SELECT * FROM articletable where name ='"+articleName+"';", function (err, resp)  {
   //console.log(err, res);
   //pool.end();
   if (err){
-      //window.alert("failure");
       res.status(500).send(err.toString());
-      //return err.toString();
   }
   else
   {
       var dataToSend = {
-        'title' : JSON.stringify(resp.rows[0].title),
-        'content' : JSON.stringify(resp.rows[0].content)
+        'title' : JSON.parse(JSON.stringify(resp.rows[0].title)),
+        'content' : JSON.parse(JSON.stringify(resp.rows[0].content)),
       };
-      //window.alert("success");
       res.send(getTemplate(dataToSend));
-      //return JSON.stringify(res);
   }
 });
   
@@ -188,7 +228,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
-var port = 80;
+var port = 8080;
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);
 });

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<head>
+    <title>
+        Register For a New User ID
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/ui/style.css">
+    <!-- 
+        <link rel="stylesheet" href="/bootstrap.css"><!--bootstrap-grid.min.css For Grid -.->
+        <link rel="stylesheet" href="/2bootstrap.css"><!-- bootstrap.min.css For Normal Bootstrap -.->
+        <link rel="stylesheet" type="" href="/bootstrap-4.0.0-beta-dist/css/bootstrap-reboot.css">-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <style>
+        .dropdown-header {
+            font-size: 120%;
+            color: black;
+            font-weight: bold;
+        }
+        body{
+            padding-top: 70px;
+        }
+
+        *[role='menuitem'] {
+            text-indent: 5px;
+        }
+    </style>
+</head>
+
+<body>
+            <!-- Navigation Bar Start-->
+            <nav class=" navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class=" navbar-header">
+                    <button type="button" class=" navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsing">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class=" navbar-brand" href="">Navigation Bar</a>
+                </div>
+                <div class=" collapse navbar-collapse" id="navbar-collapsing">
+            <ul id="navbar" class="nav navbar-nav">
+                    <li><a href="#">FirstLink</a></li>
+                    <li><a href="#">SecondLink</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ThirdLink</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">3.1</a></li>
+                        <li><a href="#">3.2</a></li>
+                        <li><a href="#">3.3</a></li>
+                        <li><a href="#">3.4</a></li>
+                        <li><a href="#">3.5</a></li>
+                    </ul>
+                </li>
+                    <li><a href="#">FourthTab</a></li>
+                </ul>
+            </div>
+            </nav>
+<!-- Navigation Bar End -->
+<!-- BreadCrumb Start-->
+        <ol class=" breadcrumb">
+            <li><a href="#">Item1</a></li>
+            <li><a href="#">Item2</a></li>
+            <li><a href="#">Item3</a></li>
+            <li class="active">ActiveItem</li>
+        </ol>
+        <!--BreadCrumb End-->
+        <!-- Pagination Start-->
+        <ul id="paginationLst" class=" pagination">
+                <li id="prev"><a href="#">&lt;&lt;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="active"><a href="#">4</a></li>
+                <li id="next"><a href="#">&gt;&gt;</a></li>
+        </ul>
+            <!--Pagination End-->
+
+    <div class="container border-light">
+        <!-- Navigation Menu Start-->
+            <ul id="navpills" class="nav nav-pills nav-justified">
+                    <li><a href="#">FirstTab</a></li>
+                    <li><a href="#">SecondTab</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ThirdTab</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">3.1</a></li>
+                        <li><a href="#">3.2</a></li>
+                        <li><a href="#">3.3</a></li>
+                        <li><a href="#">3.4</a></li>
+                        <li><a href="#">3.5</a></li>
+                    </ul>
+                </li>
+                    <li><a href="#">FourthTab</a></li>
+                </ul>
+<!-- Navigation Menu End -->
+<!-- Navigation Tabs Start-->
+        <ul id="navtab" class=" nav nav-tabs">
+            <li><a href="#">FirstTab</a></li>
+            <li><a href="#">SecondTab</a></li>
+            <li><a href="#">ThirdTab</a></li>
+            <li><a href="#">FourthTab</a></li>
+        </ul>
+        <!-- Navigation Tabs End-->
+        <form>
+<!-- Dropdown Start-->
+            <div class="dropdown">
+                <button type="button" data-toggle="dropdown" class=" btn dropdown-toggle">
+                            Navigate to Other Pages<span class="caret"></span>
+                        </button>
+                <ul class=" dropdown-menu pull-left" role="menu" aria-labelledby="dropdownMenu1">
+                    <li class=" dropdown-header" role="presentation menuitem">Main Pages
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">Home Page</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a tabindex="-1" href="#">Home Page</a>
+                    </li>
+                    <li>
+                        <a tabindex="-1" href="#">Home Page</a>
+                    </li>
+                </ul>
+            </div>
+<!-- Dropdown End-->
+<!-- Button Dropdown Start -->
+            <div id="ButtonDropdowns">
+
+                <div id="paymentOptions" class=" btn-group" data-toggle="buttons">
+                    <!--$("input[name='paymentMode']:checked")[0].value; -->
+                    <label id="click" class="btn btn-success">
+                                MasterCard
+                                <input type="radio" name="paymentMode" value="mastercard" />
+                            </label>
+                    <label class="btn btn-success">Visa
+                                    <input type="radio" name="paymentMode" value="visa" />
+                                </label>
+                    <div id="otherOptions" class=" btn-group">
+                        <button id="otherOptionsDisplayLabel" type="button" class=" btn btn-success dropdown-toggle">
+                                                                Other PaymentOptions
+                                                            </button>
+                        <button type="button" data-toggle="dropdown" class=" btn btn-success dropdown-toggle">
+                                                                <span class="caret"></span></button>
+
+                        <ul class=" dropdown-menu pull-left" role="menu" aria-labelledby="dropdownMenu1">
+                            <li class=" dropdown-header" role="presentation menuitem">IndianOptions
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" data-selected="rupay" tabindex="-1" href="#">RuPay</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" data-selected="othoption2" href="#">Other Option2</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" data-selected="othoption3" href="#">Other Option3</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="radio" name="paymentMode" id="otherOptionrb" class=" hidden">
+                </div>
+            </div>
+<!-- Button Dropdown End -->
+            <h1 class=" text-center">Register for a New User</h1>
+
+
+            <div class="form-group">
+                <label for="firstNametxtBox">First Name</label>
+                <div class=" input-group">
+                    <input name="firstName" id="firstNametxtBox" type="text" class="form-control">
+                    <span class=" input-group-addon">A</span>
+                </div>
+            </div>
+            <div class=" btn-group" data-toggle="buttons">
+                <label id="click" class="btn btn-success">
+                            Male
+                            <input type="radio" name="gender" value="male" />
+                        </label>
+                <label class="btn btn-success">Female
+                                <input type="radio" name="gender" value="female" />
+                            </label>
+                <!-- $("input[name='gender']:checked")[0].value; -->
+            </div>
+
+            <button class="btn btn-success">Save</button>
+        </form>
+        <span class=" label label-default">Just a Label Example</span>
+        <span class="badge">200</span>
+        <div class="jumbotron">
+            <h1>JumboTron Example</h1>
+        <p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p>
+    </div>
+        <p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p><p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p><p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p><p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p><p>Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeatsJust some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+                Just some content which repeats
+
+        </p>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown-toggle").dropdown();
+        });
+        /*
+        $("#click").click(function () {
+            window.alert($("input[name='gender']:checked").val());
+        });*/
+
+        $("#navtab li").click(function () {
+            $("#navtab li").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        var $paginationLst = $("#paginationLst > li");
+
+        $paginationLst.click(function () {
+
+           var getid = $(this).attr('id');
+
+           var endOfSwitching = function ($tag) {
+               var returnvalue = $tag.attr("id") ? true : false;
+             return returnvalue;
+           };
+
+           if(getid == 'prev')
+           {
+               //var $currentElement = $("#paginationLst > li.active");
+                //var $elementToBeSet = $currentElement.siblings.next();
+                var $next = $(this).siblings('.active').prev();
+                if(!endOfSwitching($next)){
+                    $paginationLst.removeClass("active");
+                    $next.addClass("active");
+                }
+           }
+
+           if(getid == 'next')
+           {
+            var $next = $(this).siblings('.active').next();
+                if(!endOfSwitching($next)){
+                    $paginationLst.removeClass("active");
+                    $next.addClass("active");
+                }
+           }
+
+        });
+
+        $("#otherOptions a").click(function () {
+            var optiontext = $(this).text();
+            $("#otherOptionsDisplayLabel").text(optiontext);
+
+            $("#paymentOptions > label").removeClass("active");
+            $("#otherOptionsDisplayLabel").addClass("active");
+
+
+            $("#otherOptionrb").prop("checked", true);
+            var valueOfAnchor = $(this).attr("data-selected");
+            $("#otherOptionrb").val(valueOfAnchor);
+
+        });
+    </script>
+</body>
+
+</html>
