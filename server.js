@@ -54,7 +54,7 @@ var article = {
        </p>
        <p>I love dogs</p>`
   }
-}
+};
 function getTemplate(data) {
   var title = data.title;
   var content = data.content;
