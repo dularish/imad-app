@@ -204,7 +204,7 @@ app.get('/ui/register', function (req, res) {
 
 app.get('/ui/:articleName', function (req, res) {
   var articleName = req.params.articleName;
-  res.send(getTemplate(article[articleName]));
+  res.send(/*getTemplate*/(article[articleName]));
 });
 
 
