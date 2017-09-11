@@ -114,7 +114,7 @@ app.post('/ui/create-user', function (req,res) {
   var salt = crypto.randomBytes(8).toString('hex');
   var passwordToStore = hashtext(password,salt);
 
-  pool.query('insert into usercredentials values($1,$2)','trial1','password1', function (err,result) {
+  pool.query('insert into usercredentials values($1,$2)',['trial1','password1'], function (err,result) {
     if(err){
       //return "error";
       res.status(500).send(err.toString());
