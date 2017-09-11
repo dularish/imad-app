@@ -25,7 +25,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/ui/createuser', function (req,res) {
+app.post('/ui/create/create-user', function (req,res) {
   
   var username = req.body.username;
   var password = req.body.password;
@@ -33,15 +33,14 @@ app.post('/ui/createuser', function (req,res) {
   var salt = crypto.randomBytes(8).toString('hex');
   var passwordToStore = hashtext(password,salt);
 
-  pool.query('insert into usercredentials values($1,$2)',['trial1','password1'], function (err,result) {
+  pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
     if(err){
       //return "error";
       res.status(500).send(err.toString());
     }
     else{
       //return "success";
-      res.send("Data Successfullly stored");
-      res.send(JSON.stringify(result));
+      res.send(result.rowCount.toString() + " rows changed");
     }
   });
 });
