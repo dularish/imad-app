@@ -25,7 +25,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/ui/create-user', function (req,res) {
+app.post('/ui/createuser', function (req,res) {
   
   var username = req.body.username;
   var password = req.body.password;
