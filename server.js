@@ -22,6 +22,8 @@ var pool = new Pool(config);
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var article = {
   'article-one': {
     'title': 'Cats',
@@ -104,7 +106,7 @@ var hashtext = function (password,salt) {
   return ['pbkdf2','1000',salt,'512',hashedText.toString('hex')].join('$');
 }
 
-app.post('/ui/create-user', function (req,res) {
+app.post('/ui/create/create-user', function (req,res) {
   
   var username = req.body.username;
   var password = req.body.password;
@@ -112,14 +114,14 @@ app.post('/ui/create-user', function (req,res) {
   var salt = crypto.randomBytes(8).toString('hex');
   var passwordToStore = hashtext(password,salt);
 
-  pool.query('insert into usercredentials values($1,$2)',username,password, function (err,result) {
+  pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
     if(err){
-      return "error";
+      //return "error";
       res.status(500).send(err.toString());
     }
     else{
-      return "success";
-      res.send(JSON.stringify(result));
+      //return "success";
+      res.send(result.rowCount.toString() + " rows changed");
     }
   });
 });
