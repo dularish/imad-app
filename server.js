@@ -77,7 +77,7 @@ var article = {
        <p>I love dogs</p>`
   }
 };
-var getTemplate = function (data) {
+/*var getTemplate = function (data) {
   var title = data.title;
   var content = data.content;
   var template = `
@@ -104,7 +104,7 @@ var getTemplate = function (data) {
 `;
 
   return template;
-};
+};*/
 
 app.get('/ui/testDB', function (req, resp) {
   pool.query('SELECT * FROM testTable', function (err, res)  {
@@ -224,7 +224,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
         'title' : JSON.parse(JSON.stringify(resp.rows[0].title)),
         'content' : JSON.parse(JSON.stringify(resp.rows[0].content)),
       };
-      res.send(getTemplate(dataToSend));
+      res.send(/*getTemplate*/(dataToSend));
   }
 });
   
