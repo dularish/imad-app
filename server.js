@@ -55,7 +55,7 @@ var article = {
        <p>I love dogs</p>`
   }
 };
-function getTemplate(data) {
+/*function getTemplate(data) {
   var title = data.title;
   var content = data.content;
   var template = `
@@ -82,7 +82,7 @@ function getTemplate(data) {
 `;
 
   return template;
-}
+}*/
 
 app.get('/ui/testDB', function (req, resp) {
   pool.query('SELECT * FROM testTable', function (err, res)  {
