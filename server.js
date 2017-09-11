@@ -24,6 +24,28 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/ui/create-user', function (req,res) {
+  
+  var username = req.body.username;
+  var password = req.body.password;
+
+  var salt = crypto.randomBytes(8).toString('hex');
+  var passwordToStore = hashtext(password,salt);
+
+  pool.query('insert into usercredentials values($1,$2)',['trial1','password1'], function (err,result) {
+    if(err){
+      //return "error";
+      res.status(500).send(err.toString());
+    }
+    else{
+      //return "success";
+      res.send("Data Successfullly stored");
+      res.send(JSON.stringify(result));
+    }
+  });
+});
+
 var article = {
   'article-one': {
     'title': 'Cats',
@@ -106,26 +128,7 @@ var hashtext = function (password,salt) {
   return ['pbkdf2','1000',salt,'512',hashedText.toString('hex')].join('$');
 };
 
-app.post('/ui/create-user', function (req,res) {
-  
-  var username = req.body.username;
-  var password = req.body.password;
 
-  var salt = crypto.randomBytes(8).toString('hex');
-  var passwordToStore = hashtext(password,salt);
-
-  pool.query('insert into usercredentials values($1,$2)',['trial1','password1'], function (err,result) {
-    if(err){
-      //return "error";
-      res.status(500).send(err.toString());
-    }
-    else{
-      //return "success";
-      res.send("Data Successfullly stored");
-      res.send(JSON.stringify(result));
-    }
-  });
-});
 app.get('/ui/hash/:text', function (req, resp) {
   
     var password = req.params.text;
