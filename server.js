@@ -104,7 +104,7 @@ app.get('/ui/testDB', function (req, resp) {
 var hashtext = function (password,salt) {
   var hashedText = crypto.pbkdf2Sync(password,salt,1000,512,'sha512');
   return ['pbkdf2','1000',salt,'512',hashedText.toString('hex')].join('$');
-}
+};
 
 app.post('/ui/create-user', function (req,res) {
   
@@ -116,11 +116,12 @@ app.post('/ui/create-user', function (req,res) {
 
   pool.query('insert into usercredentials values($1,$2)',username,password, function (err,result) {
     if(err){
-      return "error";
+      //return "error";
       res.status(500).send(err.toString());
     }
     else{
-      return "success";
+      //return "success";
+      res.send("Data Successfullly stored");
       res.send(JSON.stringify(result));
     }
   });
