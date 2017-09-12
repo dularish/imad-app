@@ -114,7 +114,7 @@ app.post('/ui/create/create-user', function (req,res) {
 
   pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
     if(err){
-      if(err.toString().match("duplicate key value violates unique constraint")){
+      if(err.toString().match(/duplicate key value violates unique constraint/g)){
         res.status(500).send("UserName already in use");
       }
       else{
