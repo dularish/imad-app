@@ -114,11 +114,14 @@ app.post('/ui/create/create-user', function (req,res) {
 
   pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
     if(err){
-      //return "error";
-      res.status(500).send(err.toString());
+      if(err.toString().match("duplicate key value violates unique constraint"){
+        res.status(500).send("UserName already in use");
+      }
+      else{
+        res.status(500).send(err.toString());
+      }
     }
     else{
-      //return "success";
       res.send(result.rowCount.toString() + " rows changed");
     }
   });
