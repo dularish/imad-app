@@ -1,10 +1,10 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-//const { Pool, Client } = require('pg');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var config = ({
   user: 'dularish1993',
@@ -24,6 +24,12 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(session({
+  secret: 'someSecretValueIDontunderstand',
+  saveUninitialized: true,
+  auth:null,
+  cookie: { maxAge: 1000*60*60*24*1}
+}));
 var article = {
   'article-one': {
     'title': 'Cats',
@@ -84,6 +90,119 @@ var getTemplate = function (data) {
   return template;
 };
 
+var getTemplate2 = function (data) {
+  var title = data.title;
+  var content = data.content;
+  var template = `
+  <html>
+  
+  <head>
+      <title>
+          ${title}
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/ui/style.css">
+      <link rel="stylesheet" href="/bootstrap.css"><!--For Grid -->
+      <link rel="stylesheet" href="/2bootstrap.css"><!--For Normal Bootstrap -->
+      <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+      <!--The below are added from register page-->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous">
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+      <a href="/">Get Back to Home</a>
+  <hr>
+  
+      <div class="container">
+          ${content}
+      </div>
+      <br><br><br><br><br><br><br><br><br>
+      <div class="container border" style="padding-top: 10px;">
+      <div id="commentsDiv">
+      <h4>Comments:</h4>
+      <br>
+      <span id="tobereplaced" class="hidden">Please Login to comment</span>
+  <div id="addingcommentsDiv">
+      <div class="row" style="align-items:center; padding-top:10px; padding-bottom:10px;">
+          <div class="col-lg-8 col-sm-8 col-xs-8">
+              <h5>Please enter your comments below:</h5>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-xs-4">
+              <span id="tobereplaced">Commenting as : </span><span id="commenter"></span>
+          </div>
+      </div>
+      <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  ">
+              <!--offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2-->
+              <textarea id="commentArea" style="width:inherit" placeholder="Enter your comment here" rows=""></textarea>
+          </div>
+          <br>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+              <input id="commentButton" type="button" value="Submit">
+          </div>
+      </div>
+  </div>
+  <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+      <div id="commentsListDiv" class="col-lg-8 col-md-8 col-sm-8 col-xs-8 ">
+
+      </div>
+  </div>
+</div>
+</div>
+</div>
+  <script type="text/javascript" src="/ui/main.js">
+  </script>
+  <script type="text/javascript">
+      window.onload = (function () {
+         //window.alert("document is ready"); 
+  
+         var loginuserreq = new XMLHttpRequest();
+         loginuserreq.open('GET', 'http://' + window.location.host + '/ui/login/check-login',true);
+  
+         loginuserreq.onreadystatechange = function () {
+              if (loginuserreq.readyState == XMLHttpRequest.DONE) {
+                  if (loginuserreq.status == 200) {
+                    $("#addingcommentsDiv").removeClass("hidden");
+                    $("#tobereplaced").addClass("hidden");
+                    if(!loginuserreq.responseText.match(/User not logged in/)){
+                    document.getElementById('commenter').innerHTML += loginuserreq.responseText.match(/User logged in: (.+)/)[1];
+                    getAllCommentsAndUpdateDiv(window.location.href.match(/\\/ui\\/fromDB\\/(article.*)/)[1]);
+                  }
+                  else{
+                      $("#addingcommentsDiv").addClass("hidden");
+                      getAllCommentsAndUpdateDiv(window.location.href.match(/\\/ui\\/fromDB\\/(article.*)/)[1]);
+                      $("#tobereplaced").removeClass("hidden");
+                  }
+              }
+                  else
+                      {
+                        $("#addingcommentsDiv").addClass("hidden");
+                        getAllCommentsAndUpdateDiv(window.location.href.match(/\\/ui\\/fromDB\\/(article.*)/)[1]);
+                        $("#tobereplaced").removeClass("hidden");
+                      }
+              }
+          };
+          loginuserreq.send();
+      });
+  </script>
+  </body>
+  
+  </html>
+`;
+
+  return template;
+};
+
 app.get('/ui/testDB', function (req, resp) {
   pool.query('SELECT * FROM testTable', function (err, res)  {
   //console.log(err, res);
@@ -106,15 +225,15 @@ var hashtext = function (password,salt) {
   return ['pbkdf2','1000',salt,'512',hashedText.toString('hex')].join('$');
 }
 
-app.post('/ui/create/create-user', function (req,res) {
+app.post('/ui/insertcomment', function (req,res) {
   
-  var username = req.body.username;
-  var password = req.body.password;
+  var username = req.session.auth.username;
+  var comment = req.body.commenttext;
+  var articlename = req.body.articlename;
 
-
-  pool.query('insert into usercredentials values($1,$2)',[username,password], function (err,result) {
+  pool.query('insert into tbl_comments(username,article_name,commenttext,recordedon) values($1,$2,$3,current_timestamp);',[username,articlename,comment], function (err,result) {
     if(err){
-      if(err.toString().match(/duplicate key value violates unique constraint/g)){
+      if(err.toString().match(/duplicate key value violates unique constraint/g).length > 0){
         res.status(500).send("UserName already in use");
       }
       else{
@@ -125,6 +244,102 @@ app.post('/ui/create/create-user', function (req,res) {
       res.send(result.rowCount.toString() + " rows changed");
     }
   });
+});
+app.post('/ui/comments/getcommentsForTheArticle', function (req,res) {
+  
+  var articlename = req.body.articlename;
+
+  pool.query('select * from tbl_comments where article_name =$1;',[articlename], function (err,result) {
+    if(err){
+      if(err.toString().match(/duplicate key value violates unique constraint/g).length > 0){
+        res.status(500).send("UserName already in use");
+      }
+      else{
+        res.status(500).send(err.toString());
+      }
+    }
+    else{
+      res.send(JSON.stringify(result));
+    }
+  });
+});
+
+app.post('/ui/create/create-user', function (req,res) {
+  
+  var username = req.body.username;
+  var password = req.body.password;
+  var salt = crypto.randomBytes(8).toString('hex');
+  var passwordToStore = hashtext(password,salt);
+
+  pool.query('insert into usercredentials values($1,$2)',[username,passwordToStore], function (err,result) {
+    if(err){
+      if(err.toString().match(/duplicate key value violates unique constraint/g).length > 0){
+        res.status(500).send("UserName already in use");
+      }
+      else{
+        res.status(500).send(err.toString());
+      }
+    }
+    else{
+      res.send(result.rowCount.toString() + " rows changed");
+    }
+  });
+});
+app.post('/ui/login/login-user', function (req,res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  pool.query('select * from usercredentials where username = $1',[username], function (err,result) {
+    if(err){
+      res.status(500).send(err.toString());
+    }
+    else{
+      if(result.rows.length == 0){
+        res.status(403).send('User Credentials not match');
+      }
+      else{
+        var combinedPassword = result.rows[0].password.toString();
+        var algorithm = combinedPassword.split('$')[0];
+        var iterations = combinedPassword.split('$')[1];
+        var salt = combinedPassword.split('$')[2];
+        var resultLength = combinedPassword.split('$')[3];
+        if(combinedPassword == hashtext(password,salt)){
+          req.session.auth = {'username': result.rows[0].username};
+          res.send('User Logged in Successfully : ' + username);
+          
+        }
+        else{
+          res.status(403).send("User Credentials not match");
+        }
+        
+      }
+    }
+  });
+ app.get('/ui/login/check-login', function (req,res) {
+   if( req.session){
+      if( req.session.auth){
+         if(req.session.auth.username){
+     res.send('User logged in: ' + req.session.auth.username.toString())
+   }
+   else{
+    res.send('User not logged in');
+  }
+  }
+   else{
+     res.send('User not logged in');
+   }
+  }
+  else{
+    res.send('User not logged in');
+  }
+ }); 
+ app.get('/ui/login/logout-user', function (req, res) {
+   delete req.session.auth;
+   res.send('User successfully logged out');  
+ });
+  
+
+
 });
 app.get('/ui/hash/:text', function (req, resp) {
   
@@ -215,7 +430,7 @@ app.get('/ui/fromDB/:articleName', function (req, res) {
         'title' : JSON.parse(JSON.stringify(resp.rows[0].title)),
         'content' : JSON.parse(JSON.stringify(resp.rows[0].content)),
       };
-      res.send(getTemplate(dataToSend));
+      res.send(getTemplate2(dataToSend));
   }
 });
   

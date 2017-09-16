@@ -5,14 +5,34 @@
         Cats
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/ui/style.css">
-    <link rel="stylesheet" href="/bootstrap.css"><!--For Grid -->
-    <link rel="stylesheet" href="/2bootstrap.css"><!--For Normal Bootstrap -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/bootstrap.css">
+    <!--For Grid -->
+    <link rel="stylesheet" href="/2bootstrap.css">
+<!--The below are added from register page-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    
+
 </head>
+
 <body>
     <a href="/">Get Back to Home</a>
-<hr>
+    <hr>
 
     <div class="container">
 
@@ -31,37 +51,74 @@
     </div>
     <br><br><br><br><br><br><br><br><br>
     <div class="container border" style="padding-top: 10px;">
-    <div id="commentsDiv">
-        <h4>Comments:</h4>
-        <br>
-        <div class="row" style="align-items:center; padding-top:10px; padding-bottom:10px;">
-        <div class="col-lg-8 col-sm-8 col-xs-8">
-        <h5>Enter your name here and comment below:</h5>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-xs-4">
-            <input id="commenter"  type="text" placeholder="FirstName LastName">
-        </div>
-        </div>
-        <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  ">
-                <!--offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2-->
-        <textarea id="commentArea" style="width:inherit" placeholder="Enter your comment here" rows="" ></textarea>
-    </div>
-    <br>
-    <div class="col-lg-4 col-md-4 col-sm-4">
-        <input id="commentButton" type="button" value="Submit">
-    </div>
-    </div>
-    <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
-    <div id="commentsListDiv" class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " >
+        <div id="commentsDiv">
+                <h4>Comments:</h4>
+                <br>
+                <span id="tobereplaced" class="hidden">Please Login to comment</span>
+            <div id="addingcommentsDiv">
+                <div class="row" style="align-items:center; padding-top:10px; padding-bottom:10px;">
+                    <div class="col-lg-8 col-sm-8 col-xs-8">
+                        <h5>Please enter your comments below:</h5>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-xs-4">
+                        <span id="tobereplaced">Commenting as : </span><span id="commenter"></span>
+                    </div>
+                </div>
+                <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  ">
+                        <!--offset-lg-2 offset-md-2 offset-sm-2 offset-xs-2-->
+                        <textarea id="commentArea" style="width:inherit" placeholder="Enter your comment here" rows=""></textarea>
+                    </div>
+                    <br>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <input id="commentButton" type="button" value="Submit">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="align-items:center; padding-top:10px; padding-bottom:20px;">
+                <div id="commentsListDiv" class="col-lg-8 col-md-8 col-sm-8 col-xs-8 ">
 
+                </div>
+            </div>
+        </div>
     </div>
     </div>
-    </div>
-</div>
-</div>
-<script type="text/javascript" src="/ui/main.js">
-</script>
+    <script type="text/javascript" src="/ui/main.js">
+
+    </script>
+    <script type="text/javascript">
+        window.onload = (function () {
+            var loginuserreq = new XMLHttpRequest();
+            loginuserreq.open('GET', 'http://' + window.location.host + '/ui/login/check-login', true);
+
+            loginuserreq.onreadystatechange = function () {
+                if (loginuserreq.readyState == XMLHttpRequest.DONE) {
+                    if (loginuserreq.status == 200) {
+                        $("#addingcommentsDiv").removeClass("hidden");
+                        $("#tobereplaced").addClass("hidden");
+                        if(!loginuserreq.responseText.match(/User not logged in/)){
+                        document.getElementById('commenter').innerHTML += loginuserreq.responseText.match(/User logged in: (.+)/)[1];
+                        getAllCommentsAndUpdateDiv(window.location.href.match(/\/ui\/(article.*)/)[1]);
+                        window.alert(loginuserreq.responseText);
+                        }
+                        else{
+                            $("#addingcommentsDiv").addClass("hidden");
+                            getAllCommentsAndUpdateDiv(window.location.href.match(/\/ui\/(article.*)/)[1]);
+                            $("#tobereplaced").removeClass("hidden");
+                        }
+                    }
+                    else {
+                        //document.getElementById("addingcommentsDiv").classList.toggle("hide");
+                        $("#addingcommentsDiv").addClass("hidden");
+                        getAllCommentsAndUpdateDiv(window.location.href.match(/\/ui\/(article.*)/)[1]);
+                        $("#tobereplaced").removeClass("hidden");
+                    }
+                }
+            };
+            loginuserreq.send();
+        });
+
+    </script>
 </body>
 
 </html>
