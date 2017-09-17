@@ -305,9 +305,10 @@ app.post('/ui/login/login-user', function (req,res) {
         var resultLength = combinedPassword.split('$')[3];
         if(combinedPassword == hashtext(password,salt)){
           req.session.auth = {'username': result.rows[0].username};
-          res.body = {
+          var body = {
             Message : "User logged in"
           };
+          res.json(body);
           res.send('User Logged in Successfully : ' + username);
           
         }
