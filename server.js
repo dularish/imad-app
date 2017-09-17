@@ -308,13 +308,13 @@ app.post('/ui/login/login-user', function (req,res) {
           var body = {
             Message : 'User Logged in Successfully : ' + username
           };
-<<<<<<< HEAD
+
           res.json(body);
           //res.send('User Logged in Successfully : ' + username);
-=======
+
           //res.json(body);
           res.send('User Logged in Successfully : ' + username);
->>>>>>> 38eda022617931eb2f4891186fd80eeca2903941
+
           
         }
         else{
