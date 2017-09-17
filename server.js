@@ -295,7 +295,11 @@ app.post('/ui/login/login-user', function (req,res) {
     }
     else{
       if(result.rows.length == 0){
-        res.status(403).send('User Credentials not match');
+        var body = {
+          Error : "User Credentials not match"
+        };
+        res.status(403).json(body);
+        //res.status(403).send('User Credentials not match');
       }
       else{
         var combinedPassword = result.rows[0].password.toString();
