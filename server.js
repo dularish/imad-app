@@ -312,8 +312,6 @@ app.post('/ui/login/login-user', function (req,res) {
           res.json(body);
           //res.send('User Logged in Successfully : ' + username);
 
-          //res.json(body);
-          res.send('User Logged in Successfully : ' + username);
 
           
         }
