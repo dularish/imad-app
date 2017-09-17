@@ -306,14 +306,18 @@ app.post('/ui/login/login-user', function (req,res) {
         if(combinedPassword == hashtext(password,salt)){
           req.session.auth = {'username': result.rows[0].username};
           var body = {
-            Message : "User logged in"
+            Message : 'User Logged in Successfully : ' + username
           };
           res.json(body);
-          res.send('User Logged in Successfully : ' + username);
+          //res.send('User Logged in Successfully : ' + username);
           
         }
         else{
-          res.status(403).send("User Credentials not match");
+          var body = {
+            Error : "User Credentials not match"
+          };
+          res.status(403).json(body);
+          //res.status(403).send("User Credentials not match");
         }
         
       }
