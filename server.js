@@ -308,7 +308,7 @@ app.post('/ui/login/login-user', function (req,res) {
           var body = {
             Message : "User logged in"
           };
-          res.json(body);
+          //res.json(body);
           res.send('User Logged in Successfully : ' + username);
           
         }
