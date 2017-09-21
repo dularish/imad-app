@@ -219,6 +219,16 @@ app.get('/ui/testDB', function (req, resp) {
 });
 
 });
+app.get('/ui/getArticlesListFromDB', function (req,resp) {
+  pool.query('SELECT name from articletable', function (err, res) {
+    if(err){
+      resp.status(500).send(err.toString());
+    }
+    else{
+      resp.send(JSON.stringify(res.rows));
+    }
+  });
+});
 
 var hashtext = function (password,salt) {
   var hashedText = crypto.pbkdf2Sync(password,salt,1000,512,'sha512');
